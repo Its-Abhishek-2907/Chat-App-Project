@@ -1,8 +1,11 @@
 {
+  "homepage": "https://github.com/Its-Abhishek-2907/Chat-App-Project",
   "name": "chat-app",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy":"gh-pages -d dist",
     "server":"nodemon backend/server.js",
     "start": "node backend/server.js",
     "Build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
