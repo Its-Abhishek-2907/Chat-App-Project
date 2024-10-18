@@ -17,7 +17,7 @@ export const SocketContextProvider = ({ children }) => {
 
         if (authUser) {
             console.log("hello")
-            const socket = io("https://chat-app-iq30.onrender.com", {
+            const socket = io("https://chat-app-ufth.onrender.com", {
                 query: {
                     usesrId: authUser._id
                 }
