@@ -14,28 +14,37 @@ export const SocketContextProvider = ({ children }) => {
     const { authUser } = useAuthContext();
 
     useEffect(() => {
-
         if (authUser) {
-            console.log("hello")
-            const socket = io("https://chat-app-ufth.onrender.com", {
+            const socket = io("http://localhost:3000", {
+                withCredentials: true,
+                transports: ["websocket", "polling"],  // Allow fallback to polling
                 query: {
-                    usesrId: authUser._id
-                }
+                    userId: authUser._id
+                },
+                reconnection: true,        // Enable reconnection
+                reconnectionAttempts: 5,   // Try to reconnect 5 times
+                reconnectionDelay: 1000    // Wait 1 second between attempts
             });
-
+    
+            socket.on("connect", () => {
+                console.log("Socket Connected!", socket.id);
+            });
+    
+            socket.on("connect_error", (error) => {
+                console.log("Socket Connection Error:", error);
+            });
+    
             setSocket(socket);
-
-            // socket.on() is used to listen to the events. can be used on both server and client side
+    
             socket.on("getOnlineUsers", (users) => {
                 setOnlineUsers(users);
-            })
-
-            return () => socket.close();
-        } else {
-            if (socket) {
-                socket.close();
-                setSocket(null);
-            }
+            });
+    
+            return () => {
+                if (socket) {
+                    socket.disconnect();
+                }
+            };
         }
     }, [authUser]);
 
