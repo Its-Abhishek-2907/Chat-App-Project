@@ -15,7 +15,7 @@ export const SocketContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (authUser) {
-            const socket = io("https://chat-app-szhk.onrender.com", {
+            const socket = io("http://localhost:3000", {
                 withCredentials: true,
                 transports: ["websocket", "polling"],  // Allow fallback to polling
                 query: {
