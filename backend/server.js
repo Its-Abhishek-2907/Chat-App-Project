@@ -39,14 +39,8 @@ server.listen(PORT, () => {
     connectToMongoDB();
     console.log(`server listening on port http://localhost:${PORT}`)
 });
-<<<<<<< HEAD
-=======
-
 
 
 
 //                        https://chat-app-t5rl.onrender.com/
 
-
-
->>>>>>> 68e45d7 (Frontend Update)
