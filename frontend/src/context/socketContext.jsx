@@ -1,12 +1,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useAuthContext } from "./authContext"
+import { useAuthContext } from "./authContext";
 import { io } from "socket.io-client";
 
 const SocketContext = createContext();
 
 export const useSocketContext = () => {
     return useContext(SocketContext);
-}
+};
 
 export const SocketContextProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
@@ -17,29 +17,29 @@ export const SocketContextProvider = ({ children }) => {
         if (authUser) {
             const socket = io("https://chatty-l4co.onrender.com", {
                 withCredentials: true,
-                transports: ["websocket", "polling"],  // Allow fallback to polling
+                transports: ["websocket", "polling"],
                 query: {
                     userId: authUser._id
                 },
-                reconnection: true,        // Enable reconnection
-                reconnectionAttempts: 5,   // Try to reconnect 5 times
-                reconnectionDelay: 1000    // Wait 1 second between attempts
+                reconnection: true,
+                reconnectionAttempts: 5,
+                reconnectionDelay: 1000
             });
-    
+
             socket.on("connect", () => {
                 console.log("Socket Connected!", socket.id);
             });
-    
+
             socket.on("connect_error", (error) => {
                 console.log("Socket Connection Error:", error);
             });
-    
+
             setSocket(socket);
-    
+
             socket.on("getOnlineUsers", (users) => {
                 setOnlineUsers(users);
             });
-    
+
             return () => {
                 if (socket) {
                     socket.disconnect();
@@ -49,6 +49,8 @@ export const SocketContextProvider = ({ children }) => {
     }, [authUser]);
 
     return (
-        <SocketContext.Provider value={{ socket, onlineUsers }}>{children}</SocketContext.Provider>
-    )
-}
+        <SocketContext.Provider value={{ socket, onlineUsers }}>
+            {children}
+        </SocketContext.Provider>
+    );
+};

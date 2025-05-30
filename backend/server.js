@@ -23,7 +23,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/users', userRoutes);
 
-app.use(express.static(path.join(__dirname,"/frontend/dist")))
+app.use(express.static(path.join(__dirname, "/frontend/dist")))
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
@@ -39,3 +39,14 @@ server.listen(PORT, () => {
     connectToMongoDB();
     console.log(`server listening on port http://localhost:${PORT}`)
 });
+<<<<<<< HEAD
+=======
+
+
+
+
+//                        https://chat-app-t5rl.onrender.com/
+
+
+
+>>>>>>> 68e45d7 (Frontend Update)

@@ -19,4 +19,8 @@ export default defineConfig({
       }
     }
   }
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 68e45d7 (Frontend Update)

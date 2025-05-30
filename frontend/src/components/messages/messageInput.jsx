@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { BsSend } from 'react-icons/bs'
 import useSendMessage from '../../hooks/useSendMessage';
+import { Smile, Paperclip } from "lucide-react";
 
 function messageInput() {
 
