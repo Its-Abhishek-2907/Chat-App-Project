@@ -15,7 +15,7 @@ export const SocketContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (authUser) {
-            const socket = io("http://localhost:3000", {
+            const socket = io("https://chatty-l4co.onrender.com", {
                 withCredentials: true,
                 transports: ["websocket", "polling"],  // Allow fallback to polling
                 query: {
